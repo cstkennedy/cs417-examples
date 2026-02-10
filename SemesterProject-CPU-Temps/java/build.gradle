@@ -15,8 +15,8 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.toVersion(11)
-    targetCompatibility = JavaVersion.toVersion(11)
+    sourceCompatibility = JavaVersion.toVersion(21)
+    targetCompatibility = JavaVersion.toVersion(21)
 }
 
 repositories {
@@ -24,13 +24,9 @@ repositories {
 }
 
 dependencies {
-    // Everything in src/main (production code).
-    // implementation ...
-
-    // Everything in src/test (test code)
-    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:5.8.2"
-    testImplementation "org.hamcrest:hamcrest-library:2.2"
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.hamcrest:hamcrest-library:2.2'
 }
 
 jar {
@@ -72,20 +68,19 @@ test {
 // Documentation Tool(s)
 //------------------------------------------------------------------------------
 javadoc {
-    failOnError false
+    failOnError = false
 }
 
 //------------------------------------------------------------------------------
-// Analysis Tool(s)
+// Analysis Tools
 //------------------------------------------------------------------------------
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "0.8.13"
 }
 
 jacocoTestReport {
     reports {
-        html.required = true
         xml.required = true
         csv.required = true
     }
