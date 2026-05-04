@@ -20,16 +20,15 @@ fn generate_random_points(
     lower_limit: f64,
     upper_limit: f64,
     n: u64,
-) -> Vec<Point> {
+) -> impl Iterator<Item = Point> {
     let d = rand::distributions::Uniform::new_inclusive(lower_limit, upper_limit);
     let mut rng = thread_rng();
 
     (0..n)
-        .map(|_| {
+        .map(move |_| {
             let x = rng.sample(d);
             Point(x, f(x))
         })
-        .collect()
 }
 
 #[derive(Parser)]
@@ -59,13 +58,16 @@ fn main() {
 
     let max_num_points: u64 = 2_u64.pow(max_magnitude);
     let point_sequence = generate_random_points(math_f, limit_a, limit_b, max_num_points);
+    let f_of_x_values: Vec<f64> = point_sequence
+        .into_iter()
+        .map(|point| point.1)
+        .collect();
 
     for magnitude in 0..=max_magnitude {
         let num_points = 2_u64.pow(magnitude);
 
-        let sum_of_f_of_x_values: f64 = point_sequence
-            .par_iter()
-            .map(|point| point.1)
+        let sum_of_f_of_x_values: f64 = f_of_x_values
+            .iter()
             .take(num_points as usize)
             .sum();
 

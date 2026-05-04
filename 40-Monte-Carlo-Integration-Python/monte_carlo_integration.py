@@ -90,6 +90,7 @@ def naive_main():
     print(f"{integral_result:16.8f}")
 
 
+@simple_timer
 def not_so_naive_main():
     """
     This main function demonstrates the more "Pythonic" approach
@@ -173,7 +174,7 @@ def main_with_numpy():
         print(f"| {num_points:>16} | {integral_result:^20.8f} |")
 
 
-@simple_timer
+#  @simple_timer
 def main_with_numpy_better():
     """
     This main demonstrates the impact of the number of points on Monte Carlo
@@ -208,6 +209,6 @@ def main_with_numpy_better():
 if __name__ == "__main__":
     #  naive_main()
     #  not_so_naive_main()
-    main_without_a_table_flip()
-    main_with_numpy()
+    #  main_without_a_table_flip()
+    #  main_with_numpy()
     main_with_numpy_better()
