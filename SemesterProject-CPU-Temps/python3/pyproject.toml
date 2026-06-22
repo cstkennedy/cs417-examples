@@ -1,5 +1,6 @@
 [project]
 name = "parse_temps"
+packages = ["parse_temps"]
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
